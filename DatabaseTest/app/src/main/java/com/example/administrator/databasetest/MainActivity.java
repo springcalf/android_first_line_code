@@ -1,5 +1,7 @@
 package com.example.administrator.databasetest;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -21,6 +23,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dbHelper.getWritableDatabase();
+            }
+        });
+        Button addDatabase = (Button)findViewById(R.id.add_data);
+        addDatabase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+                ContentValues values = new ContentValues();
+                values.put("name","the da vinci code");
+                values.put("author","Dan Brown");
+                values.put("pages",454);
+                values.put("price",16.96);
+                db.insert("book", null, values);
+                values.clear();
+                values.put("name","hot city");
+                values.put("author","bruce");
+                values.put("pages", 455);
+                values.put("price", 17.96);
+                db.insert("book", null, values);
+
             }
         });
     }
