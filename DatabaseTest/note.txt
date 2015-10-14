@@ -1,0 +1,8 @@
+1.Android为了让我们能够更加方便地管理数据库，专门提供了一个 SQLiteOpenHelper 帮助类，借助这个类就可以非常简单地对数据库进行创建和升级.SQLiteOpenHelper 是一个抽象类,就需要创建一个自己的帮助类去继承它。SQLiteOpenHelper 中有两个抽象方法，分别是
+onCreate()和 onUpgrade()，我们必须在自己的帮助类里面重写这两个方法，然后分别在这两个方法中去实现创建、升级数据库的逻辑。
+2.SQLiteOpenHelper 中 还 有 两 个 非 常 重 要 的 实 例 方 法 ， getReadableDatabase() 和
+getWritableDatabase()。这两个方法都可以创建或打开一个现有的数据库（如果数据库已存在
+则直接打开，否则创建一个新的数据库） ，并返回一个可对数据库进行读写操作的对象。不
+同的是，当数据库不可写入的时候（如磁盘空间已满）getReadableDatabase()方法返回的对
+象将以只读的方式去打开数据库，而 getWritableDatabase()方法则将出现异常。
+3.SQLiteOpenHelper中有两个构造方法可供重写， 一般使用参数少一点的那个构造方法即可。数据库文件会存放在/data/data/<package name>/databases/目录下
