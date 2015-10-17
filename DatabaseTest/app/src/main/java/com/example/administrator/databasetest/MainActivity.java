@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        dbHelper = new MyDatabaseHelper(this,"BookStore.db",null,2);
+        dbHelper = new MyDatabaseHelper(this,"BookStore.db",null,3);
         Button createDatabase = (Button)findViewById(R.id.create_database);
         createDatabase.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,11 +37,22 @@ public class MainActivity extends AppCompatActivity {
                 values.put("price",16.96);
                 db.insert("book", null, values);
                 values.clear();
-                values.put("name","hot city");
+                values.put("name", "hot city");
                 values.put("author","bruce");
                 values.put("pages", 455);
                 values.put("price", 17.96);
                 db.insert("book", null, values);
+
+            }
+        });
+        Button updateDatabase = (Button)findViewById(R.id.update_data);
+        updateDatabase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+                ContentValues values = new ContentValues();
+                values.put("price","22");
+                db.update("book",values,"name=?",new String[]{"hot city"});
 
             }
         });
