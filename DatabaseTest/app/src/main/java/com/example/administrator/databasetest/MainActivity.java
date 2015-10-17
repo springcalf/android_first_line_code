@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -54,6 +55,16 @@ public class MainActivity extends AppCompatActivity {
                 values.put("price","22");
                 db.update("book",values,"name=?",new String[]{"hot city"});
 
+            }
+        });
+
+        Button delDatabase = (Button)findViewById(R.id.delete_data);
+        delDatabase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+                db.delete("book","pages=?",new String[]{"22"});
+                Log.d("delete","del the pages = 22");
             }
         });
     }
